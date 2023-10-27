@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import MovieCard from "./MovieCard";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 // eslint-disable-next-line react/prop-types
 const Row = ({ title, fetchURL, rowID }) => {
+  const slider = useRef();
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     axios.get(fetchURL).then((resp) => {
@@ -13,12 +14,12 @@ const Row = ({ title, fetchURL, rowID }) => {
   }, [fetchURL]);
 
   const slideLeft = () => {
-    var slider = document.getElementById("slider" + rowID);
-    slider.scrollLeft = slider.scrollLeft - 500;
+    // var slider = document.getElementById("slider" + rowID);
+    slider.current.scrollLeft = slider.current.scrollLeft - 500;
   };
   const slideRight = () => {
-    var slider = document.getElementById("slider" + rowID);
-    slider.scrollLeft = slider.scrollLeft + 500;
+    // var slider = document.getElementById("slider" + rowID);
+    slider.current.scrollLeft = slider.current.scrollLeft + 500;
   };
 
   return (
@@ -32,7 +33,8 @@ const Row = ({ title, fetchURL, rowID }) => {
         />
 
         <div
-          id={`slider` + rowID}
+          // id={`slider` + rowID}
+          ref={slider}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
         >
           {movies.map((item, id) => {
