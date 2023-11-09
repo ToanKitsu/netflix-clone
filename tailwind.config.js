@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    animation: {
+      sgrow: "sgrow 1s ease-in-out",
+    },
   },
   plugins: [tailwindScrollbarHide],
 };

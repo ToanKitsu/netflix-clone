@@ -32,15 +32,28 @@ const MovieCard = ({ backdrop_path, title, id }) => {
   const baseImgUrl = "https://image.tmdb.org/t/p";
   return (
     <>
-      <div className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2">
-        <img src={`${baseImgUrl}/w500/${backdrop_path}`} alt={title} />
-        <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
-          <p className="white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full w-full">
+      <div className="hover:scale-125 duration-500 hover:z-20 w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2">
+        {/* <img
+          src={`${baseImgUrl}/w500/${backdrop_path}`}
+          alt={title}
+          className="relative"
+        /> */}
+
+        {/* <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
+          <p className=" white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full w-full ">
             {title}
           </p>
-          <p onClick={saveShow} className="absolute top-4 left-4 text-gray-300">
+          <p onClick={saveShow} className="absolute top-0 left-0 text-gray-300">
             {like ? <AiFillHeart /> : <AiOutlineHeart />}
           </p>
+        </div> */}
+        <div className="relative">
+          <img
+            src={`${baseImgUrl}/w500/${backdrop_path}`}
+            alt={title}
+            className=""
+          />
+          <div className="h-full w-full top-0  hover:bg-white/80 absolute "></div>
         </div>
       </div>
     </>

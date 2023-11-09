@@ -22,17 +22,19 @@ const Row = ({ title, fetchURL }) => {
 
   return (
     <>
-      <h2 className="text-white font-bold md:text-xl p-4">{title}</h2>
-      <div className="relative flex items-center group">
+      <h2 className="text-white font-bold md:text-xl pt-6 pl-4 pr-4 ">
+        {title}
+      </h2>
+      <div className="relative flex items-center group ">
         <AiOutlineLeft
           onClick={slideLeft}
           size={40}
-          className="absolute left-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-10 cursor-pointer hidden group-hover:block"
+          className="absolute left-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-30 cursor-pointer hidden group-hover:block"
         />
 
         <div
           ref={slider}
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
+          className="w-full sm:h-[120px] md:h-[160px] lg:h-[200px] overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative overflow-y-hidden pt-4"
         >
           {movies.map((item, id) => {
             return item.backdrop_path && <MovieCard key={id} {...item} />;
@@ -42,7 +44,7 @@ const Row = ({ title, fetchURL }) => {
         <AiOutlineRight
           onClick={slideRight}
           size={40}
-          className="absolute right-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-10 cursor-pointer hidden group-hover:block"
+          className="absolute right-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-30 cursor-pointer hidden group-hover:block"
         />
       </div>
     </>
