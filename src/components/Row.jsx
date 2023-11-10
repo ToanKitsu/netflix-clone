@@ -2,15 +2,19 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import MovieCard from "./MovieCard";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import requests from "../Requests";
 
 // eslint-disable-next-line react/prop-types
 const Row = ({ title, fetchURL }) => {
   const slider = useRef();
   const [movies, setMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
+
   useEffect(() => {
     axios.get(fetchURL).then((resp) => {
       setMovies(resp.data.results);
     });
+    axios.get(requests.requestGenre).then((res) => setGenres(res.data));
   }, [fetchURL]);
 
   const slideLeft = () => {
@@ -37,7 +41,11 @@ const Row = ({ title, fetchURL }) => {
           className="w-full sm:h-[120px] md:h-[160px] lg:h-[200px] overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative overflow-y-hidden pt-4"
         >
           {movies.map((item, id) => {
-            return item.backdrop_path && <MovieCard key={id} {...item} />;
+            return (
+              item.backdrop_path && (
+                <MovieCard key={id} {...item} genres={genres} />
+              )
+            );
           })}
         </div>
 
