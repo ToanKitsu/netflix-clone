@@ -14,7 +14,7 @@ const Row = ({ title, fetchURL }) => {
     axios.get(fetchURL).then((resp) => {
       setMovies(resp.data.results);
     });
-    axios.get(requests.requestGenre).then((res) => setGenres(res.data));
+    axios.get(requests.requestGenre).then((res) => setGenres(res.data.genres));
   }, [fetchURL]);
 
   const slideLeft = () => {
@@ -38,7 +38,7 @@ const Row = ({ title, fetchURL }) => {
 
         <div
           ref={slider}
-          className="w-full sm:h-[120px] md:h-[160px] lg:h-[200px] overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative overflow-y-hidden pt-4"
+          className="w-full sm:h-[120px] md:h-[160px] lg:h-[200px] overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative overflow-y-hidden pt-4 pb-4"
         >
           {movies.map((item, id) => {
             return (
