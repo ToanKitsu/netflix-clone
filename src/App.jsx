@@ -25,7 +25,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/:id" element={<MoreInfo />} />
+          <Route path="/movies/:id" element={<MoreInfo />} />
         </Routes>
       </AuthContextProvider>
     </>

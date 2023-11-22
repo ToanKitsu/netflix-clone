@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -9,9 +8,8 @@ import {
   AiOutlineLike,
   AiOutlineDislike,
 } from "react-icons/ai";
-
+import Trailer from "./Trailer";
 import { FiPlay } from "react-icons/fi";
-import { IoInformation } from "react-icons/io5";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
@@ -21,11 +19,13 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
   // eslint-disable-next-line no-unused-vars
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [modalTrailer, setModalTrailer] = useState(false);
+
   const [vote, setVote] = useState(false);
   const [disLike, setDisLike] = useState(false);
   const { user } = UserAuth();
   const baseImgUrl = "https://image.tmdb.org/t/p";
-
+  const navigate = useNavigate();
   const movieID = doc(db, "users", `${user?.email}`);
 
   const truncateString = (str, num) => {
@@ -44,8 +44,22 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
     setDisLike(!disLike);
   };
 
+  const handleMoreInfo = () => {
+    navigate(`/movies/${id}`);
+  };
+
+  const handleIconClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleModalTrailer = () => {
+    setModalTrailer(!modalTrailer);
+  };
+
   const filteredGenreNames = genres
+    // eslint-disable-next-line react/prop-types
     .reduce((acc, genre) => {
+      // eslint-disable-next-line react/prop-types
       if (genre_ids.includes(genre?.id)) {
         acc.push(genre.name);
       }
@@ -79,11 +93,17 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
             alt={title}
             className=""
           />
-          <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
+          <div
+            className="max-md:hidden absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white"
+            onClick={handleMoreInfo}
+          >
             <p className=" white-space-normal text-4xl md:text-sm max-sm:text-xs font-bold flex justify-center h-full w-full mt-4">
               {truncateString(title, 30)}
             </p>
-            <div className="absolute top-0 left-0 flex gap-2 mt-[76px] max-md:mt-[56px] ms-3 max-sm:text-[8px]">
+            <div
+              className="absolute top-0 left-0 flex gap-2 mt-[76px] max-md:mt-[56px] ms-3 max-sm:text-[8px]"
+              onClick={handleIconClick}
+            >
               <p
                 onClick={saveShow}
                 className="text-[#DC2626] p-2 bg-white rounded-full"
@@ -94,7 +114,10 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
                   <AiOutlineHeart className="text-black" />
                 )}
               </p>
-              <p className="text-black p-2 rounded-full bg-white">
+              <p
+                className="text-black p-2 rounded-full bg-white hover:cursor-pointer"
+                onClick={handleModalTrailer}
+              >
                 <FiPlay />
               </p>
               <p
@@ -109,11 +132,6 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
               >
                 {disLike ? <AiFillDislike /> : <AiOutlineDislike />}
               </p>
-              <p className="text-black p-2 rounded-full bg-white">
-                <Link to={`${id}`}>
-                  <IoInformation />
-                </Link>
-              </p>
             </div>
             <div className="absolute top-0 left-0 flex gap-2 mt-[120px] max-md:mt-[100px] ms-3 text-sm">
               {genres && filteredGenreNames}
@@ -121,6 +139,15 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
           </div>
         </div>
       </div>
+
+      {modalTrailer && (
+        <div
+          className=" fixed top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center z-50"
+          onClick={handleModalTrailer}
+        >
+          <Trailer movieId={id} />
+        </div>
+      )}
     </>
   );
 };

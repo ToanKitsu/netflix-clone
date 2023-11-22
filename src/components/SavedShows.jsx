@@ -37,6 +37,8 @@ const SavedShows = () => {
     }
   };
 
+  console.log(movies);
+
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setMovies(doc.data()?.savedShows);
