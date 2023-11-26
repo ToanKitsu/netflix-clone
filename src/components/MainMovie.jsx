@@ -1,26 +1,18 @@
 import { useEffect, useState } from "react";
 import requests from "../Requests";
 import axios from "axios";
+import { useTask } from "../context/context";
 
 const MainMovie = () => {
   const [movies, setMovies] = useState([]);
-
   const movie = movies[Math.floor(Math.random() * movies.length)];
+  const { truncateString, baseImgUrl } = useTask();
 
-  const baseImgUrl = "https://image.tmdb.org/t/p";
   useEffect(() => {
     axios.get(requests.requestPopular).then((resp) => {
       setMovies(resp.data.results);
     });
   }, []);
-
-  const truncateString = (str, num) => {
-    if (str?.length > num) {
-      return str.slice(0, num) + "...";
-    } else {
-      return str;
-    }
-  };
 
   return (
     <div className="w-full h-[550px] text-white">

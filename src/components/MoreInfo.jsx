@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
@@ -10,18 +11,17 @@ import { FiPlay } from "react-icons/fi";
 import Row from "./Row";
 import requests from "../Requests";
 import Trailer from "./Trailer";
-
+import { useTask } from "../context/context";
 const MoreInfo = () => {
   const { id } = useParams();
+  const { baseImgUrl, movieUrl, movieID } = useTask();
+  const { user } = UserAuth();
+
   const [singleMovie, setSingleMovie] = useState([]);
   const [modalTrailer, setModalTrailer] = useState(false);
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
-  const { user } = UserAuth();
-  const movieID = doc(db, "users", `${user?.email}`);
 
-  const baseImgUrl = "https://image.tmdb.org/t/p";
-  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=f9be5a8ffc38df1c193902c1420deb91`;
   const genresName = singleMovie?.genres?.map((genre) => genre.name).join(", ");
 
   const saveShow = async () => {
@@ -44,7 +44,7 @@ const MoreInfo = () => {
     setModalTrailer(!modalTrailer);
   };
 
-  const countrys = singleMovie?.production_countries?.map(
+  const countries = singleMovie?.production_countries?.map(
     (country) => country.name
   );
 
@@ -53,8 +53,9 @@ const MoreInfo = () => {
   );
 
   useEffect(() => {
-    axios.get(url).then((res) => setSingleMovie(res.data));
+    axios.get(movieUrl(id)).then((res) => setSingleMovie(res.data));
   }, [id]);
+
   return (
     <>
       {/* Top section */}
@@ -155,7 +156,7 @@ const MoreInfo = () => {
               <li>
                 <span className=" text-gray-400">Country:</span>
                 <div className="mt-3 text-white">
-                  {countrys?.map((company, index) => {
+                  {countries?.map((company, index) => {
                     return <p key={`${index}a`}>{company}</p>;
                   })}
                 </div>

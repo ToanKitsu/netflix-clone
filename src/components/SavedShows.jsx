@@ -37,8 +37,6 @@ const SavedShows = () => {
     }
   };
 
-  console.log(movies);
-
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setMovies(doc.data()?.savedShows);
@@ -54,7 +52,7 @@ const SavedShows = () => {
         <AiOutlineLeft
           onClick={slideLeft}
           size={40}
-          className="absolute left-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-10 cursor-pointer hidden group-hover:block"
+          className="absolute left-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-30 cursor-pointer hidden group-hover:block"
         />
 
         <div
@@ -90,7 +88,7 @@ const SavedShows = () => {
         <AiOutlineRight
           onClick={slideRight}
           size={40}
-          className="absolute right-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-10 cursor-pointer hidden group-hover:block"
+          className="absolute right-0 m-2 bg-white rounded-full opacity-50 hover:opacity-100 z-30 cursor-pointer hidden group-hover:block"
         />
       </div>
     </>
