@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +12,11 @@ import {
 } from "react-icons/ai";
 import Trailer from "./Trailer";
 import { FiPlay } from "react-icons/fi";
-import { arrayUnion, updateDoc } from "firebase/firestore";
 
+import { arrayUnion, updateDoc } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
 import { useTask } from "../context/context";
+
 const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
   const [vote, setVote] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -72,7 +74,7 @@ const MovieCard = ({ backdrop_path, title, id, genre_ids, genres }) => {
       alert("Please log in to save a movie");
     }
   };
-  // sm:h-[160px] md:h-[180px] lg:h-[200px]
+
   return (
     <>
       <div
