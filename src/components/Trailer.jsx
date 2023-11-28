@@ -33,8 +33,9 @@ const Trailer = ({ movieId }) => {
   return (
     <div>
       <iframe
-        width="940"
-        height="530"
+        className="w-[360px] h-[200px] sm:w-[554px] sm:h-[314px] md:w-[700px] md:h-[392px] lg:w-[900px] lg:h-[504px]"
+        width="100%"
+        height="100%"
         src={`https://www.youtube.com/embed/${videoKey}`}
         title="Movie Trailer"
         frameBorder="0"

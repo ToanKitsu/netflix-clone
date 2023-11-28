@@ -26,9 +26,7 @@ const Row = ({ title, fetchURL }) => {
 
   return (
     <>
-      <h2 className="text-white font-bold md:text-xl pt-6 pl-4 pr-4 ">
-        {title}
-      </h2>
+      <h2 className="text-white font-bold md:text-xl pl-4 pr-4 ">{title}</h2>
       <div className="relative flex items-center group ">
         <AiOutlineLeft
           onClick={slideLeft}

@@ -15,8 +15,6 @@ const MainMovie = () => {
     setModalTrailer(!modalTrailer);
   };
 
-  console.log(movie);
-
   useEffect(() => {
     axios.get(requests.requestPopular).then((resp) => {
       setMovies(resp.data.results);
@@ -24,7 +22,7 @@ const MainMovie = () => {
   }, []);
 
   return (
-    <div className="w-full h-[550px] text-white">
+    <div className="w-full h-[550px] text-white mb-6">
       <div className="w-full h-full">
         <div className=" absolute w-full h-[550px] bg-gradient-to-r from-black"></div>
         <img
