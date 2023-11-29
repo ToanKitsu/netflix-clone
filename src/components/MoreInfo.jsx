@@ -127,8 +127,8 @@ const MoreInfo = () => {
             </div>
           </div>
         </div>
-        <div className="relative max-sm:hidden sm:col-span-1 ">
-          <div className="max-lg:block hidden w-full h-full">
+        <div className="relative sm:col-span-1 max-sm:flex justify-center max-sm:pb-9">
+          <div className="max-lg:block hidden w-full h-full  max-sm:w-[300px]">
             <img
               src={`${baseImgUrl}/original/${singleMovie?.poster_path}`}
               alt={singleMovie.title}
