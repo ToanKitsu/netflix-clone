@@ -24,7 +24,7 @@ const Trailer = ({ movieId }) => {
 
   if (!videoKey) {
     return (
-      <p className="w-full h-full bg-black/70 flex justify-center items-center text-9xl text-white ">
+      <p className="w-full h-full bg-black/70 flex justify-center items-center sm:text-3xl md:text-4xl lg:text-5xl text-white ">
         Loading trailer...
       </p>
     );
