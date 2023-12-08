@@ -61,7 +61,7 @@ const SavedShows = () => {
 
         <div
           id={`slider`}
-          className="w-full sm:h-[180px] md:h-[200px] lg:h-[240px] overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative overflow-y-hidden pt-4 max-md:pt-6 max-md:pb-6 "
+          className="w-full sm:h-[150px] md:h-[180px] lg:h-[210px] overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative overflow-y-hidden pt-4 max-md:pt-6 max-md:pb-6 "
         >
           {movies.map((item, id) => {
             return (
